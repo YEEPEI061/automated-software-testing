@@ -23,17 +23,11 @@ public class StudentController {
     }
 
     // F1 – Retrieve Student Enrollments
-    @GetMapping("/search")
-    public List<Course> getEnrollmentsByName(
-            @RequestParam String firstName,
-            @RequestParam String lastName) {
+    @GetMapping("/student-enrollment")
+    public List<Course> getEnrollmentsByName(@RequestParam String firstName, @RequestParam String lastName) {
 
         String trimmedFirst = firstName.trim();
         String trimmedLast = lastName.trim();
-
-        if (trimmedFirst.isBlank() || trimmedLast.isBlank()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please enter both first name and last name.");
-        }
 
         List<Student> students = studentRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(trimmedFirst, trimmedLast);
 
@@ -47,6 +41,11 @@ public class StudentController {
         Student student = students.get(0);
 
         return studentService.getStudentEnrollments(student.getId());
+    }
+
+    @GetMapping("/active")
+    public List<Student> getActiveStudents() {
+        return studentService.getActiveStudents();
     }
 
 }

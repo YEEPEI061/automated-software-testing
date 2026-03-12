@@ -41,10 +41,10 @@ public class InstructorServiceTest {
         Instructor i1 = new Instructor("Stephen", "Lee");
         i1.setId(1L);
 
-        Instructor i2 = new Instructor("Jenny", "Wong");
+        Instructor i2 = new Instructor("Amelia", "Taylor");
         i2.setId(2L);
 
-        Student s1 = new Student("Jane", "Tan");
+        Student s1 = new Student("Jasmine", "Davies");
         s1.setId(1L);
 
         Course c1 = new Course();
@@ -53,7 +53,7 @@ public class InstructorServiceTest {
 
         Course c2 = new Course();
         c2.setInstructor(i2);
-        c2.setStudents(Set.of(s1, new Student("Bob","Lim")));
+        c2.setStudents(Set.of(s1, new Student("Alice","Evans")));
 
         when(instructorRepository.findAll()).thenReturn(List.of(i1, i2));
         when(courseRepository.findByInstructor_Id(1L)).thenReturn(List.of(c1));
@@ -80,12 +80,12 @@ public class InstructorServiceTest {
         Instructor i1 = new Instructor("Stephen", "Lee");
         i1.setId(1L);
 
-        Instructor i2 = new Instructor("Jenny", "Wong");
+        Instructor i2 = new Instructor("Amelia", "Taylor");
         i2.setId(2L);
 
         Course c2 = new Course();
         c2.setInstructor(i2);
-        c2.setStudents(Set.of(new Student("Alice", "Tan")));
+        c2.setStudents(Set.of(new Student("Alice", "Evans")));
 
         when(instructorRepository.findAll()).thenReturn(List.of(i1, i2));
         when(courseRepository.findByInstructor_Id(1L)).thenReturn(List.of()); // no enrollments

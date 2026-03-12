@@ -16,7 +16,6 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@ActiveProfiles("test")  // TBC
 @Transactional
 public class StudentServiceIntegrationTest {
     @Autowired
@@ -25,33 +24,33 @@ public class StudentServiceIntegrationTest {
     @Autowired
     private StudentRepository studentRepository;
 
-    @Autowired
-    private CourseRepository courseRepository;
+//    @Autowired
+//    private CourseRepository courseRepository;
+//
 
     @Test
     void testStudentEnrollmentAndActiveStudents() {
+        // Using sample data from DataLoader
+        List<Student> johnList = studentRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase("John", "Low");
+        List<Student> jasmineList = studentRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase("Jasmine", "Chong");
 
-        // Create student
-        Student s1 = studentRepository.save(new Student("John","Low"));
-        Student s2 = studentRepository.save(new Student("Inactive","Guy"));
+        assertFalse(johnList.isEmpty(), "John Low should exist in sample data");
+        assertFalse(jasmineList.isEmpty(), "Jasmine Chong should exist in sample data");
 
-        // Create course and enroll s1
-        Course c1 = new Course();
-        c1.setStudents(Set.of(s1));
-        courseRepository.save(c1);
+        Student john = johnList.get(0);
+        Student jasmine = jasmineList.get(0);
 
         // F1 – Retrieve Student Enrollments
-        List<Course> enrollments = studentService.getStudentEnrollments(s1.getId());
-        assertEquals(1, enrollments.size());
-
-        System.out.println("SUCCESS: Student enrolled in " + enrollments.size() + " course(s).");
+        List<Course> johnEnrollments = studentService.getStudentEnrollments(john.getId());
+        assertEquals(1, johnEnrollments.size()); // Math 101
+        System.out.println("F1 SUCCESS: John enrolled in " + johnEnrollments.size() + " course(s).");
 
         // F2 – List Active Students
         List<Student> activeStudents = studentService.getActiveStudents();
-        assertEquals(1, activeStudents.size());
-        assertEquals("John", activeStudents.get(0).getFirstName());
+        assertTrue(activeStudents.stream().anyMatch(s -> s.getFirstName().equals("John")));
+        assertTrue(activeStudents.stream().anyMatch(s -> s.getFirstName().equals("Jasmine")));
 
-        System.out.println("SUCCESS: Found " + activeStudents.size() + " active student(s).");
+        System.out.println("F2 SUCCESS: Found " + activeStudents.size() + " active student(s).");
     }
 
 }

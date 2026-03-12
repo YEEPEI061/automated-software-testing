@@ -70,10 +70,10 @@ public class StudentServiceTest {
     @Test
     void testGetActiveStudents() {
         // Arrange (setup test condition)
-        Student activeStudent = new Student("Jasmine", "Lim");
+        Student activeStudent = new Student("Jasmine", "Davies");
         activeStudent.setId(1L);
 
-        Student inactiveStudent = new Student("Tom", "Tan");
+        Student inactiveStudent = new Student("Tom", "Johnson");
         inactiveStudent.setId(2L);
 
         // Only active student is enrolled in a course

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import java.util.Set;
 
 @Component
-@Profile("!test")
 public class DataLoader implements CommandLineRunner {
 
     private final StudentRepository studentRepository;
@@ -32,15 +31,18 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // Create instructors
         Instructor i1 = instructorRepository.save(new Instructor("Stephen", "Lee"));
-        Instructor i2 = instructorRepository.save(new Instructor("Jenny", "Wong"));
+        Instructor i2 = instructorRepository.save(new Instructor("Amelia", "Taylor"));
+        Instructor i3 = instructorRepository.save(new Instructor("Oliver", "Smith"));
 
         // Create students
         Student s1 = studentRepository.save(new Student("John", "Low"));
-        Student s2 = studentRepository.save(new Student("Alice", "Tan"));
+        Student s2 = studentRepository.save(new Student("Jasmine", "Davies"));
+        Student s3 = studentRepository.save(new Student("Alice", "Thomas"));
+        Student s4 = studentRepository.save(new Student("Alice", "Evans"));
 
         // Create courses and enroll students
         Course c1 = new Course("Math 101", i1);
-        c1.setStudents(Set.of(s1, s2));
+        c1.setStudents(Set.of(s1, s2, s3));
         courseRepository.save(c1);
 
         Course c2 = new Course("Science 101", i2);

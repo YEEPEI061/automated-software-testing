@@ -18,7 +18,6 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@ActiveProfiles("test")
 @Transactional
 class InstructorServiceIntegrationTest {
 
@@ -35,32 +34,29 @@ class InstructorServiceIntegrationTest {
     private StudentRepository studentRepository;
 
     @Test
-    void testInstructorActivityScenarios() {
+    void testInstructorActivityUsingSampleData() {
 
-        // Create instructor
-        Instructor i1 = instructorRepository.save(new Instructor("Stephen","Lee"));
-        Instructor i2 = instructorRepository.save(new Instructor("Jenny","Wong"));
+        // Fetch sample instructors
+        List<Instructor> instructors = instructorRepository.findAll();
+        assertFalse(instructors.isEmpty(), "Sample instructors should exist");
 
-        // Create student
-        Student s1 = studentRepository.save(new Student("Jane","Tan"));
+        Instructor stephen = instructors.stream()
+                .filter(i -> i.getFirstName().equalsIgnoreCase("Stephen") && i.getLastName().equalsIgnoreCase("Lee"))
+                .findFirst().orElseThrow();
 
-        // Create a course, assign it to instructor i1, and enroll student s1
-        Course c1 = new Course();
-        c1.setInstructor(i1);
-        c1.setStudents(Set.of(s1));
-        courseRepository.save(c1);
+        Instructor oliver = instructors.stream()
+                .filter(i -> i.getFirstName().equalsIgnoreCase("Oliver") && i.getLastName().equalsIgnoreCase("Smith"))
+                .findFirst().orElseThrow();
 
         // F3 – Identify Most Active Instructor
         Instructor mostActive = instructorService.getMostActiveInstructor();
-        assertEquals(i1.getId(), mostActive.getId());
-
-        System.out.println("SUCCESS: Most active instructor is " + mostActive.getFirstName() + " " + mostActive.getLastName());
+        assertEquals(stephen.getId(), mostActive.getId());
+        System.out.println("F3 SUCCESS: Most active instructor is " + mostActive.getFirstName() + " " + mostActive.getLastName());
 
         // F4 – List Instructors with No Enrollments
         List<Instructor> noEnrollment = instructorService.getInstructorsWithNoEnrollments();
         assertEquals(1, noEnrollment.size());
-        assertEquals(i2.getId(), noEnrollment.get(0).getId());
-
-        System.out.println("SUCCESS: Found " + noEnrollment.size() + " instructor(s) with no enrollments -> " + noEnrollment.get(0).getFirstName() + " " + noEnrollment.get(0).getLastName());
+        assertEquals(oliver.getId(), noEnrollment.get(0).getId());
+        System.out.println("F4 SUCCESS: Instructor with no enrollments -> " + noEnrollment.get(0).getFirstName() + " " + noEnrollment.get(0).getLastName());
     }
 }
