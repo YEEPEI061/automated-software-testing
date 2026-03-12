@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ public class Student {
     private String lastName;
 
     @ManyToMany(mappedBy = "students")
+    @JsonBackReference
     private Set<Course> courses;
 
     // Constructors

@@ -9,6 +9,7 @@ import com.example.demo.repository.StudentRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@ActiveProfiles("test")
 @Transactional
 class InstructorServiceIntegrationTest {
 
@@ -59,6 +61,6 @@ class InstructorServiceIntegrationTest {
         assertEquals(1, noEnrollment.size());
         assertEquals(i2.getId(), noEnrollment.get(0).getId());
 
-        System.out.println("SUCCESS: Found " + noEnrollment.size() + " instructor(s) with no enrollments. -> " + noEnrollment.get(0).getFirstName() + " " + noEnrollment.get(0).getLastName());
+        System.out.println("SUCCESS: Found " + noEnrollment.size() + " instructor(s) with no enrollments -> " + noEnrollment.get(0).getFirstName() + " " + noEnrollment.get(0).getLastName());
     }
 }

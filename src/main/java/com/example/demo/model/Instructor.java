@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import jakarta.persistence.*;
 import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Instructor {
@@ -12,6 +13,7 @@ public class Instructor {
     private String lastName;
 
     @OneToMany(mappedBy = "instructor")
+    @JsonIgnore
     private Set<Course> courses;
 
     // Constructors
