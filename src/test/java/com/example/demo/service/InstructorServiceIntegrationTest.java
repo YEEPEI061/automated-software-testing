@@ -1,19 +1,15 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Course;
 import com.example.demo.model.Instructor;
-import com.example.demo.model.Student;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
 import com.example.demo.repository.StudentRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,12 +22,6 @@ class InstructorServiceIntegrationTest {
 
     @Autowired
     private InstructorRepository instructorRepository;
-
-    @Autowired
-    private CourseRepository courseRepository;
-
-    @Autowired
-    private StudentRepository studentRepository;
 
     @Test
     void testInstructorActivityUsingSampleData() {

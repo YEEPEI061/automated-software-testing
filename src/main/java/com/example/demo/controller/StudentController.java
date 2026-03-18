@@ -42,10 +42,4 @@ public class StudentController {
 
         return studentService.getStudentEnrollments(student.getId());
     }
-
-    @GetMapping("/active")
-    public List<Student> getActiveStudents() {
-        return studentService.getActiveStudents();
-    }
-
 }

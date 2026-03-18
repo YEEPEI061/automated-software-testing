@@ -15,13 +15,17 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class StudentEnrollmentsUI {
+
+    private static final Logger logger = Logger.getLogger(StudentEnrollmentsUI.class.getName());
 
     private final JFrame frame;
     private final JComboBox<String> firstNameCombo;
     private final JComboBox<String> lastNameCombo;
-    private JTable table;
+    private final JTable table;
     private final DefaultTableModel tableModel;
 
     public StudentEnrollmentsUI() {
@@ -29,7 +33,7 @@ public class StudentEnrollmentsUI {
         // Map of firstName -> list of lastNames
         Map<String, List<String>> studentMap = new HashMap<>();
         studentMap.put("John", Collections.singletonList("Low"));
-        studentMap.put("Jasmine", Arrays.asList("Davies"));
+        studentMap.put("Jasmine", Collections.singletonList("Davies"));
         studentMap.put("Alice", Arrays.asList("Thomas", "Evans"));
 
         frame = new JFrame("Retrieve Student Enrollments");
@@ -211,7 +215,7 @@ public class StudentEnrollmentsUI {
             }
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            logger.log(Level.SEVERE, "Failed to retrieve enrollment data", ex);
             JOptionPane.showMessageDialog(frame, "Failed to retrieve data: " + ex.getMessage());
         }
     }

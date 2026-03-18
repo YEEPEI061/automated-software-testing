@@ -2,16 +2,13 @@ package com.example.demo.service;
 
 import com.example.demo.model.Course;
 import com.example.demo.model.Student;
-import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.StudentRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,18 +21,14 @@ public class StudentServiceIntegrationTest {
     @Autowired
     private StudentRepository studentRepository;
 
-//    @Autowired
-//    private CourseRepository courseRepository;
-//
-
     @Test
     void testStudentEnrollmentAndActiveStudents() {
         // Using sample data from DataLoader
         List<Student> johnList = studentRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase("John", "Low");
-        List<Student> jasmineList = studentRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase("Jasmine", "Chong");
+        List<Student> jasmineList = studentRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase("Jasmine", "Davies");
 
         assertFalse(johnList.isEmpty(), "John Low should exist in sample data");
-        assertFalse(jasmineList.isEmpty(), "Jasmine Chong should exist in sample data");
+        assertFalse(jasmineList.isEmpty(), "Jasmine Davies should exist in sample data");
 
         Student john = johnList.get(0);
         Student jasmine = jasmineList.get(0);

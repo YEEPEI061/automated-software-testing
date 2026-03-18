@@ -6,8 +6,8 @@ import com.example.demo.model.Student;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
 import com.example.demo.repository.StudentRepository;
+import org.jspecify.annotations.NonNull;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
@@ -28,7 +28,7 @@ public class DataLoader implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String @NonNull ... args) throws Exception {
         // Create instructors
         Instructor i1 = instructorRepository.save(new Instructor("Stephen", "Lee"));
         Instructor i2 = instructorRepository.save(new Instructor("Amelia", "Taylor"));
