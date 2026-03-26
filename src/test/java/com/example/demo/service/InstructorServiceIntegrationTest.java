@@ -1,9 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Instructor;
-import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.InstructorRepository;
-import com.example.demo.repository.StudentRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
