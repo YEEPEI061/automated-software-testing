@@ -163,10 +163,10 @@ public class StudentEnrollmentsUI {
     }
 
     private void fetchEnrollments() {
-        String firstName = (String) firstNameCombo.getSelectedItem();
-        String lastName = (String) lastNameCombo.getSelectedItem();
+        String firstName = firstNameCombo.getEditor().getItem().toString().trim();
+        String lastName = lastNameCombo.getEditor().getItem().toString().trim();
 
-        if (firstName == null || lastName == null || firstName.trim().isEmpty() || lastName.trim().isEmpty()) {
+        if (firstName.trim().isEmpty() || lastName.trim().isEmpty()) {
             JOptionPane.showMessageDialog(frame, "Please enter both first name and last name!");
             return;
         }
