@@ -37,7 +37,7 @@ public class StudentServiceTest {
     @Test
     void testGetStudentEnrollments() {
         // Arrange (setup test condition)
-        Student student = new Student("John", "Low");
+        Student student = new Student("Jasmine", "Davies");
         student.setId(1L);
 
         Course c1 = new Course();

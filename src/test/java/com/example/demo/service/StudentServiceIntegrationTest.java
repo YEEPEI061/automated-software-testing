@@ -40,8 +40,11 @@ public class StudentServiceIntegrationTest {
 
         // F2 – List Active Students
         List<Student> activeStudents = studentService.getActiveStudents();
+        assertEquals(3, activeStudents.size());
+
         assertTrue(activeStudents.stream().anyMatch(s -> s.getFirstName().equals("John")));
         assertTrue(activeStudents.stream().anyMatch(s -> s.getFirstName().equals("Jasmine")));
+        assertTrue(activeStudents.stream().anyMatch(s -> s.getFirstName().equals("Alice") && s.getLastName().equals("Thomas")));
 
         System.out.println("F2 SUCCESS: Found " + activeStudents.size() + " active student(s).");
     }
