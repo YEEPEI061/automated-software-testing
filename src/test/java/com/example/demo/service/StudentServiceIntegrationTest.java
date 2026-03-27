@@ -31,7 +31,6 @@ public class StudentServiceIntegrationTest {
         assertFalse(jasmineList.isEmpty(), "Jasmine Davies should exist in sample data");
 
         Student john = johnList.get(0);
-        Student jasmine = jasmineList.get(0);
 
         // F1 – Retrieve Student Enrollments
         List<Course> johnEnrollments = studentService.getStudentEnrollments(john.getId());
