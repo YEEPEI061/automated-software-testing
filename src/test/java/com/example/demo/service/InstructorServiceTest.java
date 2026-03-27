@@ -38,10 +38,10 @@ public class InstructorServiceTest {
     @Test
     void testGetMostActiveInstructor() {
         // Arrange (setup test condition)
-        Instructor i1 = new Instructor("Stephen", "Lee");
+        Instructor i1 = new Instructor("Amelia", "Taylor");
         i1.setId(1L);
 
-        Instructor i2 = new Instructor("Amelia", "Taylor");
+        Instructor i2 = new Instructor("Stephen", "Lee");
         i2.setId(2L);
 
         Student s1 = new Student("Jasmine", "Davies");
@@ -77,7 +77,7 @@ public class InstructorServiceTest {
     @Test
     void testGetInstructorsWithNoEnrollments() {
         // Arrange (setup test condition)
-        Instructor i1 = new Instructor("Stephen", "Lee");
+        Instructor i1 = new Instructor("Oliver", "Smith");
         i1.setId(1L);
 
         Instructor i2 = new Instructor("Amelia", "Taylor");
